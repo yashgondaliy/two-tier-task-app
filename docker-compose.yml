@@ -1,0 +1,45 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    environment: 
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: yash
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: mydb
+    networks:
+      - task_net
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD","mysqladmin","ping","-h","localhost","-uroot","-padmin"]
+      interval: 10s
+      retries: 5
+      start_period: 60s
+      timeout: 5s
+  
+  flaskapp:
+    build:
+      context: .
+    container_name: flaskapp
+    environment:
+      DB_HOST: mysql
+      DB_USER: yash
+      DB_PASSWORD: admin
+      DB_NAME: mydb
+      MYSQL_ROOT_PASSWORD: admin
+    networks:
+      - task_net
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    restart: always
+
+networks:
+  task_net:
+
+volumes:
+  mysql_data_new:
