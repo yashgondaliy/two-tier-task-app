@@ -13,6 +13,14 @@ db = mysql.connector.connect(
 
 cursor = db.cursor()
 
+# Create table if not exists
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS tasks (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ task VARCHAR(255)
+)
+""")
+
 @app.route("/", methods=["GET","POST"])
 def index():
     if request.method == "POST":
