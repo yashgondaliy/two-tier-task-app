@@ -10,26 +10,25 @@ This project demonstrates basic **DevOps practices** including containerization,
 
 User → Flask Web Application → MySQL Database
 
----
+## 📁 Project Structure
 
-# 📂 Project Structure
-
-two-tier-task-app
+```
+two-tier-task-app/
 │
-├── app
+├── app/
 │   ├── app.py
 │   ├── requirements.txt
-│   └── templates
-│        └── index.html
+│   └── templates/
+│       └── index.html
 │
-├── db
+├── db/
 │   └── init.sql
 │
-├── Dockerfile
 ├── docker-compose.yml
+├── Dockerfile
+├── .gitignore
 └── README.md
-
----
+```
 
 # ⚙️ Technologies Used
 
@@ -57,5 +56,10 @@ two-tier-task-app
 Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/yashgondaliy/two-tier-task-app.git
 cd two-tier-task-app
+```
+Run the code
+```
+git compose up -d
+git compose down
